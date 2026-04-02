@@ -45,7 +45,9 @@ The ESP32 generates a trigger pulse sequence for each measurement cycle.
 First, the trigger pin is set LOW for $2\,\mu$s, then set HIGH for
 $10\,\mu$s, and then returned LOW. The echo pulse width is measured using the
 Arduino \texttt{pulseIn()} function on the echo pin with a timeout of
-$30{,}000\,\mu$s.
+$30{,}000\,\mu$s. The detailed software and firmware implementation used
+in this project is available in the project repository
+\cite{eee354_github_repo}.
 
 If no valid echo pulse is received within the timeout, that cycle is ignored.
 If a valid pulse is received, the time value is stored and the distance is
@@ -60,5 +62,6 @@ LCD.
 \item \textbf{Website mode (Wi-Fi mode):} after reset, pressing the BOOT
 button twice starts web mode. The ESP32 starts the web interface and displays
 its IP address. A user connects over Wi-Fi, opens the IP address in a browser,
-and can view live readings, record readings, and perform calibration tasks.
+and can view live readings, record readings, and perform calibration tasks
+\cite{eee354_github_repo}.
 \end{itemize}
