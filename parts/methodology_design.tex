@@ -1,8 +1,64 @@
 \section{Methodology and Design}
 \subsection{Hardware Implementation}
-Describe the circuit connections. Mention how you handled signal conditioning (e.g., Voltage dividers, HX711 amplifier). 
-\\ \\
-\textit{Note: Attach your circuit schematic as Figure 1.}
+
+The prototype consists of the following main components:
+
+\begin{itemize}
+\item ESP32 development board
+\item HC-SR04 ultrasonic sensor
+\item Low-power laser module mounted at the centerline of the ultrasonic transducers
+\item I\textsuperscript{2}C 16$\times$2 LCD module with backpack
+\item Breadboard, jumper wires, and regulated power supply
+\end{itemize}
+
+\subsubsection{Circuit Connections}
+
+The ESP32 development board is powered using a regulated 3.3\,V supply.
+The ultrasonic sensor module is powered from the ESP32 supply rail, and
+its ground is connected to the ESP32 ground to establish a common reference.
+
+The Trigger pin of the ultrasonic sensor is connected to a digital GPIO pin
+configured as an output. The Echo pin is connected to a GPIO pin
+configured as an input.
+
+The I\textsuperscript{2}C LCD module is connected to the ESP32
+I\textsuperscript{2}C interface. The SDA and SCL lines are connected
+to GPIO 21 and GPIO 22 respectively.
+
+The laser module is mechanically fixed so that its beam emerges from the
+middle of the two ultrasonic transducers. This laser is used only as a
+visual pointer to align the measurement axis with the target point.
+
+\subsubsection{Prototype Assembly}
+
+All components are assembled on a breadboard during the prototyping stage.
+The ultrasonic transducer is positioned so that it has a clear line of sight
+to the target surface. The laser pointer is adjusted during assembly so its
+spot coincides with the center of the ultrasonic sensing direction.
+Care is taken to minimize nearby reflective objects that could introduce
+unwanted echoes. If necessary, simple shielding or damping materials can be
+placed around the sensor to reduce acoustic reflections from surrounding
+surfaces.
 
 \subsection{Software Flow}
-Describe the logic of your code. Did you use interrupts? How did you implement the moving average filter to stabilize the reading? 
+The ESP32 generates a trigger pulse sequence for each measurement cycle.
+First, the trigger pin is set LOW for $2\,\mu$s, then set HIGH for
+$10\,\mu$s, and then returned LOW. The echo pulse width is measured using the
+Arduino \texttt{pulseIn()} function on the echo pin with a timeout of
+$30{,}000\,\mu$s.
+
+If no valid echo pulse is received within the timeout, that cycle is ignored.
+If a valid pulse is received, the time value is stored and the distance is
+computed using Eq.~(3). The resulting distance is then sent to the active user
+interface mode.
+
+Two software operating modes are implemented:
+\begin{itemize}
+\item \textbf{LCD mode (local mode):} after powering the ESP32, pressing the
+BOOT button once starts local display mode, where distance is shown on the
+LCD.
+\item \textbf{Website mode (Wi-Fi mode):} after reset, pressing the BOOT
+button twice starts web mode. The ESP32 starts the web interface and displays
+its IP address. A user connects over Wi-Fi, opens the IP address in a browser,
+and can view live readings, record readings, and perform calibration tasks.
+\end{itemize}

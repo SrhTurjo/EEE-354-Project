@@ -1,32 +1,55 @@
-\section{Measurement Principle}
+\section{Measurement Principle and Mode}
 
-Ultrasonic distance measurement operates on the principle of
-time-of-flight (ToF) of an acoustic pulse. A short burst of
-high-frequency sound (typically around 40\,kHz) is emitted
-toward the target object. The sensor then switches to receive
-mode and measures the elapsed time until the reflected echo
-returns from the object.
+Ultrasonic ranging can be implemented using several methods,
+including pulse-echo time-of-flight (ToF), phase-shift-based
+measurement, and frequency-modulated/chirp-based ranging
+approaches \cite{mi13040520}. Each method has different
+trade-offs in hardware complexity, processing requirements,
+and noise robustness.
+
+In this project, we employed the ToF method because of its
+simple implementation with the ESP32 platform. The system
+was configured in a pitch-catch mode, where separate
+transmitting and receiving transducers are used.
 
 \subsection{Time-of-Flight Principle}
 
-Because the ultrasonic pulse travels from the sensor to the
-target and back again, the one-way distance $d$ can be
-determined from the measured round-trip time $t$. The
-relationship between distance and travel time is given by
+For a generic pulse-echo ToF configuration, distance is
+computed from travel time as
 
 \begin{equation}
 d = \frac{c\,t}{2}
 \end{equation}
 
-where $c$ represents the speed of sound in air and $t$
-is the measured echo return time. The factor $\frac{1}{2}$
-accounts for the two-way propagation path of the ultrasonic
-pulse.
+where $c$ is the speed of sound in air and $t$ is the measured
+round-trip time.
 
-This principle is commonly used in pulse-echo ultrasonic
-sensors such as the HC-SR04 module, where the same
-transducer emits the ultrasonic pulse and detects the
-reflected signal.
+For the pitch-catch geometry used in this work,
+Fig.~\ref{fig:pitch_catch_mode} shows two separated
+transducers with spacing $h$. If the total ToF is $t$, then each
+acoustic path has length
+
+\begin{equation}
+s = \frac{c\,t}{2}
+\end{equation}
+
+Using the right-triangle relation in the figure, the forward
+standoff distance to the target is
+
+\begin{equation}
+d = \sqrt{s^2 - \left(\frac{h}{2}\right)^2}
+= \sqrt{\left(\frac{c\,t}{2}\right)^2 - \left(\frac{h}{2}\right)^2}
+\end{equation}
+
+When $h \ll 2d$, this reduces approximately to
+$d \approx \frac{c\,t}{2}$.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=0.95\linewidth]{figures/schematic_diagram_for_pair_of_transducer.png}
+\caption{Pitch-catch ultrasonic ranging geometry (adapted from \cite{mi13040520}).}
+\label{fig:pitch_catch_mode}
+\end{figure}
 
 \subsection{Speed of Sound in Air and Environmental Compensation}
 
@@ -59,6 +82,7 @@ generally less than $0.7\%$ \cite{mi13040520}.
 
 For improved measurement accuracy, the ESP32 can update
 distance calculations using a temperature-dependent value
-of $c$. By incorporating temperature readings during
-operation, systematic errors caused by environmental
-variations can be reduced.
+of $c$. If ambient temperature is known, systematic errors
+caused by environmental variations can be reduced.
+
+
