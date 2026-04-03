@@ -51,7 +51,7 @@ $d \approx \frac{c\,t}{2}$.
 \label{fig:pitch_catch_mode}
 \end{figure}
 
-\subsection{Speed of Sound in Air and Environmental Compensation}
+\subsection{Speed of Sound in Air}
 
 The speed of sound in air depends primarily on the ambient
 temperature. In dry air at $0^\circ$C, the speed of sound is
@@ -80,9 +80,8 @@ ranges of $0$--$100\%$ relative humidity and
 $50$--$110$\,kPa pressure, the variation in sound speed is
 generally less than $0.7\%$ \cite{mi13040520}.
 
-For improved measurement accuracy, the ESP32 can update
-distance calculations using a temperature-dependent value
-of $c$. If ambient temperature is known, systematic errors
-caused by environmental variations can be reduced.
-
-
+In the implemented system, these environmental effects were
+handled through calibration rather than direct temperature or
+humidity measurement. Their impact could be reduced further in
+future versions by adding dedicated environmental sensors and
+updating the value of $c$ accordingly.

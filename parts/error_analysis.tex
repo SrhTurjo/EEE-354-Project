@@ -1,6 +1,6 @@
 \section{Error Analysis and Discussion}
 The main sources of error in this work are likely related to
-measurement setup, environmental variation, and sensor behavior. Larger
+measurement setup and sensor behavior. Larger
 deviations appear mainly at short distances and at a few isolated
 outlier points, suggesting that the error is not caused by one factor
 alone.
@@ -14,9 +14,12 @@ changing the effective reflection path.
 
 Environmental conditions may also contribute to the observed
 differences. Since the speed of sound depends on temperature and
-humidity, any variation in the surrounding air can change the measured
-distance. In addition, unwanted reflections, acoustic disturbance, and
-nearby obstacles may introduce noise into the received signal.
+humidity, variations in the surrounding air can affect the measured
+distance. In this work, these effects were handled mainly through
+calibration, and they could be reduced further by incorporating
+additional environmental sensors in future implementations. Unwanted
+reflections, acoustic disturbance, and nearby obstacles may also
+introduce noise into the received signal.
 
 Sensor and circuit limitations may be another reason for the remaining
 error. Timing jitter, inconsistent echo detection, or reduced response
@@ -36,7 +39,7 @@ sensor can still detect targets beyond that distance.
 
 Thus, the observed errors may be associated with a combination of human
 measurement uncertainty, parallel alignment error, environmental
-effects, and sensor noise. Other factors may also be present in the
+variation, and sensor noise. Other factors may also be present in the
 experimental setup. For this reason, the present system may be less
 appropriate for precision-critical applications, while remaining
 practically useful in tasks where an uncertainty of roughly

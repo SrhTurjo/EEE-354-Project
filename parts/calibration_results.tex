@@ -17,14 +17,15 @@ time-of-flight from the received signal. Using the known reference
 distance and the measured travel time, the firmware estimates an
 effective sound velocity for the current operating condition.
 
-This procedure is important because ultrasonic propagation in air is
-affected by environmental conditions, particularly temperature and
-humidity. In addition, practical measurement error may arise from sensor
-characteristics, alignment imperfections, and hardware-related timing
-offsets. By calibrating the device at a known distance, these systematic
-effects can be partially compensated, allowing the firmware to adjust its
-distance calculation for improved accuracy under the prevailing
-conditions.
+This procedure is important because practical measurement error may
+arise from sensor characteristics, alignment imperfections,
+hardware-related timing offsets, and environmental variation.
+Temperature and humidity effects were handled indirectly through
+calibration in this work. These effects could be reduced further by
+using additional environmental sensors in a future version of the
+system. By calibrating the device at a known distance, these systematic
+effects can be partially compensated, allowing the firmware to adjust
+its distance calculation for improved accuracy.
 
 \subsection{Data and Analysis}
 The sensor readings were processed in both pulse-echo mode and
@@ -132,22 +133,22 @@ pitch-catch mode in order to evaluate and compare their performance.
 \begin{tabular}{|c|c|c|c|}
 \hline
 \shortstack{\textbf{Range}\\\textbf{(cm)}} & \textbf{Method} & \shortstack{\textbf{MAE}\\\textbf{before}} & \shortstack{\textbf{MAE after}\\\textbf{outlier removal}} \\ \hline
-\multirow{4}{*}{All (0--200)} & Raw reading (pulse echo) with moving avg & 1.128571 & 0.465000 \\ \cline{2-4}
-& Raw reading (pulse echo) & 0.478214 & 0.478214 \\ \cline{2-4}
-& Pitch-catch with moving avg & 1.154643 & 0.492692 \\ \cline{2-4}
-& Pitch-catch & 0.514286 & 0.514286 \\ \hline
-\multirow{4}{*}{Close (0--10)} & Raw reading (pulse echo) with moving avg & 0.360000 & 0.360000 \\ \cline{2-4}
-& Pitch-catch with moving avg & 0.425000 & 0.425000 \\ \cline{2-4}
-& Raw reading (pulse echo) & 0.431000 & 0.431000 \\ \cline{2-4}
-& Pitch-catch & 0.528000 & 0.528000 \\ \hline
-\multirow{4}{*}{Far (60--200)} & Raw reading (pulse echo) & 0.605556 & 0.605556 \\ \cline{2-4}
-& Pitch-catch & 0.605556 & 0.605556 \\ \cline{2-4}
-& Raw reading (pulse echo) with moving avg & 2.746667 & 1.003750 \\ \cline{2-4}
-& Pitch-catch with moving avg & 2.751111 & 1.007500 \\ \hline
-\multirow{4}{*}{Medium (10--60)} & Raw reading (pulse echo) with moving avg & 0.331818 & 0.331818 \\ \cline{2-4}
-& Pitch-catch with moving avg & 0.340909 & 0.340909 \\ \cline{2-4}
-& Raw reading (pulse echo) & 0.354545 & 0.354545 \\ \cline{2-4}
-& Pitch-catch & 0.363636 & 0.363636 \\ \hline
+\multirow{4}{*}{All (0--200)} & \shortstack{Raw reading\\(pulse echo)\\with moving avg} & 1.128571 & 0.465000 \\ \cline{2-4}
+& \shortstack{Raw reading\\(pulse echo)} & 0.478214 & 0.478214 \\ \cline{2-4}
+& \shortstack{Pitch-catch\\with moving avg} & 1.154643 & 0.492692 \\ \cline{2-4}
+& \shortstack{Pitch-catch} & 0.514286 & 0.514286 \\ \hline
+\multirow{4}{*}{Close (0--10)} & \shortstack{Raw reading\\(pulse echo)\\with moving avg} & 0.360000 & 0.360000 \\ \cline{2-4}
+& \shortstack{Pitch-catch\\with moving avg} & 0.425000 & 0.425000 \\ \cline{2-4}
+& \shortstack{Raw reading\\(pulse echo)} & 0.431000 & 0.431000 \\ \cline{2-4}
+& \shortstack{Pitch-catch} & 0.528000 & 0.528000 \\ \hline
+\multirow{4}{*}{Far (60--200)} & \shortstack{Raw reading\\(pulse echo)} & 0.605556 & 0.605556 \\ \cline{2-4}
+& \shortstack{Pitch-catch} & 0.605556 & 0.605556 \\ \cline{2-4}
+& \shortstack{Raw reading\\(pulse echo)\\with moving avg} & 2.746667 & 1.003750 \\ \cline{2-4}
+& \shortstack{Pitch-catch\\with moving avg} & 2.751111 & 1.007500 \\ \hline
+\multirow{4}{*}{Medium (10--60)} & \shortstack{Raw reading\\(pulse echo)\\with moving avg} & 0.331818 & 0.331818 \\ \cline{2-4}
+& \shortstack{Pitch-catch\\with moving avg} & 0.340909 & 0.340909 \\ \cline{2-4}
+& \shortstack{Raw reading\\(pulse echo)} & 0.354545 & 0.354545 \\ \cline{2-4}
+& \shortstack{Pitch-catch} & 0.363636 & 0.363636 \\ \hline
 \end{tabular}
 \end{table}
 

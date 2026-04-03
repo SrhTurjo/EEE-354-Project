@@ -1,3 +1,21 @@
 \begin{abstract}
-A non‑contact digital range finder was developed using an ESP32 microcontroller and an ultrasonic transducer. The instrument generates short bursts of ultrasound, measures the echo time of flight (ToF) and converts this to distance. A real‑time distance (10–200 cm) is displayed on an I²C liquid crystal display (LCD). Because the speed of sound depends on temperature and, to a lesser extent, humidity, this dependence is discussed in the measurement model. Signal processing techniques such as moving‑average filtering and Kalman filtering were explored to reduce measurement noise and improve accuracy. Calibration was carried out by comparing the sensor’s output with a standard measuring tape at various distances, and performance metrics including linearity and error percentage were computed.
+This work presents the design and evaluation of a low-cost ESP32-based
+ultrasonic digital range finder for non-contact distance measurement.
+The system estimates distance using ultrasonic time-of-flight
+measurement and was implemented with an ESP32, an ultrasonic sensor
+arrangement, an I2C LCD, and firmware supporting calibration and data
+collection. Performance was studied in both pulse-echo and pitch-catch
+modes, with moving-average processing applied to improve measurement
+stability.
+
+Calibration was carried out using known reference distances so that the
+firmware could compensate for systematic error associated with sensor
+characteristics, alignment, timing offsets, and environmental effects.
+Experimental results show that the prototype achieved useful
+measurements up to 165~cm, with the most stable performance in the
+medium and far ranges. After outlier removal, the best overall mean
+absolute error was 0.465~cm, while practical clearance constraints
+indicate an effective usable range of about 90~cm in obstructed
+environments. The developed system therefore provides a simple and
+reliable solution for low-cost distance sensing applications.
 \end{abstract}
